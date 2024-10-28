@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление заявки</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Номер</th>
+            <th>Дата начала </th>
+            <th>Оборудование</th>
+            <th>Тип проблемы</th>
+            <th>Описание</th>
+            <th>Клиент</th>
+            <th>Статус</th>
+        </tr>
+        <tr>
+            <td><input id="number" placeholder="Номер"/></td>
+            <td><input id="startDate" type="date"/></td>
+            <td><input id="devise" placeholder="Оборудование"/></td>
+            <td><input id="typeproblem" placeholder="Тип проблемы"/></td>
+            <td><input id="description" placeholder="Описание"/></td>
+            <td><input id="client" placeholder="Клиент"/></td>
+            <td>
+                <select id="status">
+                    <option>Не выполнено</option>
+                    <option>В работе</option>
+                    <option>Выполнено</option>
+                </select>
+            </td>
+            <td><input id="save" value="Сохранить" type="button"></td>
+        </tr>
+    </table>
+    <script>
+        document.getElementById("save").onclick = async () => 
+        {
+            let order = {
+                number : document.getElementById("number").value,
+                startDate : document.getElementById("startDate").value,
+                devise : document.getElementById("devise").value,
+                typeproblem : document.getElementById("typeproblem").value,
+                description :document.getElementById("description").value,
+                client : document.getElementById("client").value
+            };
+            fetch("https://localhost:7048/", {
+                method:"POST",
+                headers: { "Content-type" : "application/json"},
+                body: JSON.stringify(order)
+            });
+        };
+    </script>
+</body>
+</html>
